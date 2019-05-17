@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Input, FormGroup, Label, Form, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import '././style/auth.css';
 
 export default class Auths extends React.Component {
   state = {
@@ -50,7 +52,7 @@ export default class Auths extends React.Component {
   render() {
     const { firstname, lastname, othername, username, email, phoneNumber, password } = this.state;
     return (
-      <div>
+      <div className="bill">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label for="firstname">Firstname</Label>
@@ -81,7 +83,8 @@ export default class Auths extends React.Component {
             <Input type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange}/>
           </FormGroup>
           <Button color="primary" type="submit">Sign Up</Button>
-          <Button color="secondary" >Cancel</Button> 
+          <Button color="secondary" >Cancel</Button>
+          <p>Already have an account? <Link to="/auth/signin">Sign In</Link></p>
         </Form>
       </div>
     )

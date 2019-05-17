@@ -1,0 +1,14 @@
+.form-group {
+    margin: 10px;
+    height: 60px;
+}
+.bill{
+    border: 1px solid rgb(128, 128, 128);
+}
+.input {
+    padding-top: 0;  
+    padding-bottom: 0;
+  }
+  .btn{
+      margin: 10px;
+  }
