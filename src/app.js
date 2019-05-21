@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Routes from './routes'
 import {BrowserRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from './actions';
+import {  logIn, loginLogic } from './actions';
 
 class App extends Component {
     constructor(props) {
@@ -10,27 +10,21 @@ class App extends Component {
         this.state = {  }
     }
     componentWillMount(){
-        this.props.movieslist()
-    }
-    renderMovies = (movies)=>{
-        return (
-            movies ?
-            movies.map((item)=>{
-                return (
-                    <div key={item.id}>
-                        {item.name}
-                    </div>
-                )
-            }): null
-        )
+        loginLogic()
+            .then(token => this.props.logIn(token))
         
     }
+    renderItem = (items)=>(
+            items ? items.map((item)=>(
+                <div key={item.id}>{item.name}</div>
+            )) : null
+        
+    )
     render() {
-        console.log(this.props)
         return ( 
             <div>
                 <BrowserRouter>
-                    {this.renderMovies(this.props.data.movies)}
+                    {this.renderItem(this.props.data.user)}
                     <Routes/>
                 </BrowserRouter>
             </div>
@@ -39,8 +33,11 @@ class App extends Component {
 }
  
 const mapStateToProps = (state)=>{
+    // console.log(state)
     return{
-        data:state.movies
+        data:state.user
     }
 }
-export default connect(mapStateToProps,actions)(App);
+
+
+export default connect(mapStateToProps, { logIn })(App);

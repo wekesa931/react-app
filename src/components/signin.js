@@ -35,8 +35,8 @@ export default class SignIn extends React.Component {
     axios.post(`https://questionerapplication.herokuapp.com/api/v2/user/auth/login`, obj)
       .then(res => {
         localStorage.setItem('currentuser',res.data['token']);
-        console.log(res);
-        this.props.history.push('/home')
+        // console.log(res.data);
+        // this.props.history.push('/home')
          
         
       })
