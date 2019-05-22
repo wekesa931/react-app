@@ -31,14 +31,11 @@ export default class SignIn extends React.Component {
     formData.forEach((value, key)=>{
         obj[key] = value
     });
-    console.log(obj)
     axios.post(`https://questionerapplication.herokuapp.com/api/v2/user/auth/login`, obj)
       .then(res => {
         localStorage.setItem('currentuser',res.data['token']);
-        // console.log(res.data);
-        // this.props.history.push('/home')
+        this.props.history.push('/home')
          
-        
       })
       .catch(
           err=>{

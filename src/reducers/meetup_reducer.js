@@ -1,7 +1,7 @@
 export default function(state={},action){
     switch(action.type){
-      case "MOVIES_LIST":
-        return {...state,movies:action.payload}
+      case "MEETUP_LIST":
+        return {...state, meetup:action.payload}
       default:
         return state
     }
