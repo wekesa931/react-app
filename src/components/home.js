@@ -1,50 +1,54 @@
-import React from 'react';
-import instance from '../helpers/helpers';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {  meetupData, loginLogic } from '../actions';
+import { Container } from 'reactstrap';
 
-export default class Home extends React.Component {
-  state = {
-        rendered: ''
+class Home extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {  }
   }
 
-  componentDidMount(){
-    instance.get(`https://questionerapplication.herokuapp.com/api/v2/meetups`)
-    .then(res => {
-        let meetups = res.data.meetups;
-        let mtpitem = []
-        meetups.map((meetup)=>{
-            return mtpitem.push(
-                <div key={meetup.id}>
-                    <img src={meetup.images} height="42" width="42"/>
-                    <h5>{meetup.topic}</h5>
-                    <h6>{meetup.createdon} happening at {meetup.happeningat}</h6>
-                    <p>Happening on {meetup.happeningon}</p>
-                    <p>Location: {meetup.location} Reservation:{meetup.rsvp}</p>
-                    <p>tags: {meetup.tags}</p>
-                    <hr/>
-                </div>
-            )
-            
-        });
-        console.log(mtpitem)
-        this.setState({
-            rendered:mtpitem
-        })
-    })
-    .catch(
-        err=>{
-          console.log('bad request',err);
-          console.log(err.message);
-        }
-    )
-
+  componentWillMount(){
+    let obj = '';
+    let url = `https://questioner2.herokuapp.com/api/v2/meetups/upcoming`;
+    loginLogic(obj,url)
+        .then(data => this.props.meetupData(data))
   }
-
-  render() {
-    return (
-      <div>
-        {this.state.rendered}
+  renderMeetup = (mtp)=>(
+    mtp ? mtp.map((item)=>(
+      <div key={item.id}>
+        <h5>{item.title}</h5>
+        <div>{item.created_on}</div>
+        <p>{item.details}</p>
+        <hr/>
       </div>
+    )):null
+  )
+    
+  
+  render() {
+    console.log(this.props.data)
+    return (
+      <Container>
+        {this.renderMeetup(this.props.data)}
+      </Container>
     )
   }
 }
+const mapStateToProps = (state)=>{
+  return{
+      data: state.meetup.meetup
+  }
+}
+export default connect(mapStateToProps, { meetupData })(Home);
+
+// created_on: "2019-02-20"
+// creator: 1
+// details: "Yet another test meetup. Hope it works too."
+// happening_on: "2019-02-27"
+// id: 2
+// image: "https://ipsum-media.netlify.com/img/05.jpg"
+// location: "Some venue somewhere"
+// tags: "new, test"
+// title: "Another test meetup"
