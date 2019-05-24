@@ -54,7 +54,7 @@ export default class SignIn extends React.Component {
           <Input type="text" name="username" value={contr.username} placeholder="Username" onChange={this.handleChange}/><br/>
         </FormGroup>
         <FormGroup>
-          <Input type="text" name="password" value={contr.password} placeholder="Password" onChange={this.handleChange}/> 
+          <Input type="password" name="password" value={contr.password} placeholder="Password" onChange={this.handleChange}/> 
         </FormGroup>
           <Button type="submit">Log In</Button>
         </Form>

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import Auths from './components/auth';
+import Auths from './components/Auth/auth';
 import Layout from './components/statics/layout';
-import Home from './components/home';
-import SignIn from './components/signin';
+import Home from './components/Home/home';
+import SignIn from './components/Signin/signin';
 import { Container } from 'reactstrap';
 
 const Routes = () => {
