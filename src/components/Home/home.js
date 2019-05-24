@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {  meetupData, loginLogic } from '../actions';
+import {  meetupData, requestLogic } from '../../actions';
 import { Container } from 'reactstrap';
 
-class Home extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {  }
-  }
+export class Home extends Component {
 
   componentWillMount(){
-    let obj = '';
     let url = `https://questioner2.herokuapp.com/api/v2/meetups/upcoming`;
-    loginLogic(obj,url)
+    requestLogic(url)
         .then(data => this.props.meetupData(data))
   }
   renderMeetup = (mtp)=>(
@@ -43,12 +38,4 @@ const mapStateToProps = (state)=>{
 }
 export default connect(mapStateToProps, { meetupData })(Home);
 
-// created_on: "2019-02-20"
-// creator: 1
-// details: "Yet another test meetup. Hope it works too."
-// happening_on: "2019-02-27"
-// id: 2
-// image: "https://ipsum-media.netlify.com/img/05.jpg"
-// location: "Some venue somewhere"
-// tags: "new, test"
-// title: "Another test meetup"
+

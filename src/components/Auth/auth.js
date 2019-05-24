@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {  signUp } from '../actions';
 import { Form, Button } from 'reactstrap';
-import AuthForm from '../Forms/auth_form';
+import AuthForm from '../../Forms/auth_form';
 
 export default class Auths extends React.Component {
   state = {
@@ -56,7 +55,7 @@ export default class Auths extends React.Component {
           element:'input',
           placeholder: 'password',
           label: 'Password'
-        },
+        }
       }
   }
 
@@ -67,13 +66,13 @@ export default class Auths extends React.Component {
   }
 
   handleSubmit = event => {
+    console.log('event')
   event.preventDefault()
       let dataToSubmit = {}
       for(let item in this.state.formData){
           dataToSubmit[item] = this.state.formData[item].value
       }
     
-    signUp(dataToSubmit)
     axios.post(`https://questionerapplication.herokuapp.com/api/v2/user/auth/signup`, dataToSubmit)
       .then(res => {
         console.log(res);
@@ -89,7 +88,7 @@ export default class Auths extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="form-info">
         <Form onSubmit={this.handleSubmit}>
           <AuthForm formFields={this.state.formData}
                   change={(newState)=>this.handleChange(newState)}/>
