@@ -33,5 +33,6 @@ module.exports = {
   },devServer: {
     historyApiFallback: true,
 },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [HtmlWebpackPluginConfig],
+  devtool: "source-map"
 }

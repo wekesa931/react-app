@@ -31,14 +31,11 @@ export default class SignIn extends React.Component {
     formData.forEach((value, key)=>{
         obj[key] = value
     });
-    console.log(obj)
     axios.post(`https://questionerapplication.herokuapp.com/api/v2/user/auth/login`, obj)
       .then(res => {
         localStorage.setItem('currentuser',res.data['token']);
-        console.log(res);
         this.props.history.push('/home')
          
-        
       })
       .catch(
           err=>{
@@ -57,7 +54,7 @@ export default class SignIn extends React.Component {
           <Input type="text" name="username" value={contr.username} placeholder="Username" onChange={this.handleChange}/><br/>
         </FormGroup>
         <FormGroup>
-          <Input type="text" name="password" value={contr.password} placeholder="Password" onChange={this.handleChange}/> 
+          <Input type="password" name="password" value={contr.password} placeholder="Password" onChange={this.handleChange}/> 
         </FormGroup>
           <Button type="submit">Log In</Button>
         </Form>
